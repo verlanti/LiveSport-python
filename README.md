@@ -1,5 +1,5 @@
 # LiveSport-python
-Example Django Framework Project
+Example of Django Framework Project
 
 LiveSport e' un'app Django per la visualizzazione dei campionati di calcio.
 E' possibile selezionare il campionato preferito, accedere alla classifica,
