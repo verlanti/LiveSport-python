@@ -1,0 +1,140 @@
+<head>
+    <meta charset="utf-8" />
+    <title>Team</title>
+    {% load static %}
+    <!-- The stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/squadra.css' %}"/>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rochester|Bree+Serif" />
+</head>
+
+<body>
+    <header>
+        <h2>Team Page</h2>
+        <h3>{{team_list.nome}}</h3>
+
+    </header>
+
+
+    <div id="main">
+
+
+
+        <table class="darkTable">
+            <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Partite</th>
+                  <th>Vinte</th>
+                  <th>Pareggiate</th>
+                  <th>Perse</th>
+                  <th>Gol fatti</th>
+                  <th>Gol subiti</th>
+                  <th>Differenza Reti</th>
+                  <th>Punti</th>
+                  </tr>
+              </thead>
+            <tbody>
+            <!--0.nome,1.vinte,2.pareggiate,3.perse,4.golfatti, 5.golsubiti,6.diffReti,7. Punti-->
+            {% for i in statistica_team %}
+              {% if i.0 == team_list.nome %}
+              <tr>
+                <td>{{i.0}}</td>
+                <td>38</td>
+                <td>{{i.1}}</td>
+                <td>{{i.2}}</td>
+                <td>{{i.3}}</td>
+                <td>{{i.4}}</td>
+                <td>{{i.5}}</td>
+                <td>{{i.6}}</td>
+                <td>{{i.7}}</td>
+              </tr>
+              {%endif%}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <table class="darkTable">
+            <thead>
+              <tr>
+                  <th>Partita</th>
+                  <th>Giornata</th>
+                  <th>A/R</th>
+                  <th>Data</th>
+                  <th>Locali</th>
+                  <th>Ospiti</th>
+                  <th>Gol Locali </th>
+                  <th>Gol Ospiti</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for i in match_team %}
+            {% if i.4 == team_list.nome or i.5 == team_list.nome  %}
+            <tr>
+              <td>{{i.0}}</td>
+              <td>{{i.1}}</td>
+              <td>{{i.2}}</td>
+              <td>{{i.3}}</td>
+              <td>{{i.4}}</td>
+              <td>{{i.5}}</td>
+              <td>{{i.6}}</td>
+              <td>{{i.7}}</td>
+            </tr>
+            {%endif%}
+            {% endfor %}
+            </tbody>
+          </table>
+
+        
+
+
+                  <ul id="carousel">
+                    <!--  Place additional items here -->
+
+                      <li class="visible">
+                          <a href="{% url 'app:calendario' single_giornata_list.0.campionato.id %}">
+                          <div class="tooltip">
+                            <img src="{% static 'app/images/sites/calendario.png' %}" alt="" />
+                            <span class="tooltiptext">Premi per andare al calendario </span>
+                          </div>
+                      </a>
+                    </li>
+                    <li class="visible">
+                        <a href="{% url 'app:calendarioall' single_giornata_list.0.campionato.id %}">
+                          <div class="tooltip">
+                            <img src="{% static 'app/images/sites/calendarioall.png' %}" alt="" />
+                            <span class="tooltiptext">Premi per andare al calendario 2</span>
+                          </div>
+                      </a>
+                    </li>
+                    <li class="visible">
+                        <a href="{% url 'app:classifica' single_giornata_list.0.campionato.id%}">
+                          <div class="tooltip">
+                            <img src="{% static 'app/images/sites/classifica.png' %}" alt="" />
+                            <span class="tooltiptext">Premi per andare alla classifica</span>
+                          </div>
+                      </a>
+                    </li>
+                    <li class="visible">
+                        <a href="{% url 'app:schedina' single_giornata_list.0.campionato.id %}">
+                          <div class="tooltip">
+                            <img src="{% static 'app/images/sites/pool.png' %}" alt="" />
+                            <span class="tooltiptext">Premi per andare alla schedina</span>
+                          </div>
+                      </a>
+                    </li>
+
+
+                  </ul>
+
+
+
+
+    </div>
+
+        <!-- JavaScript includes - jQuery and our own script.js -->
+              <script src="{% static 'app/js/jquery-1.7.2.min.js' %}"></script>
+        <script src="{% static 'app/js/squadra.js' %}"></script>
+
+</body>

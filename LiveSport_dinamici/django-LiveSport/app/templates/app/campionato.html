@@ -1,0 +1,117 @@
+<head>
+
+  <meta charset="utf-8" />
+  <title>Championship</title>
+  {% load static %}
+  <!-- The stylesheet -->
+  <link rel="stylesheet" type="text/css" href="{% static 'app/css/campionato.css' %}"/>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rochester|Bree+Serif" />
+
+
+</head>
+
+<body>
+
+  <header>
+    <h2>Champions Page</h2>
+    <h3>Seleziona il tuo campionato</h3>
+  </header>
+
+  <div id="main">
+
+    <table class="darkTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {% for c in campionati_list %}
+
+        <tr>
+          <td>{{ c.id }}</td>
+
+          <td align = "center">
+              <div id="holder">
+              <div class="button">
+              <a href="{% url 'app:calendario' c.id %}" style="text-decoration:none;">
+                <p class="btnText">{{c.nome}}</p>
+          {% if c.nome|length < 10 %}
+              <div class="btnTwo">
+                <p class="btnText2">GO!</p>
+              </div>
+          {% else %}
+              <div class="btnTwo">
+                <p class="btnText3">GO!</p>
+              </div>
+          {% endif %}
+                </a>
+              </div>
+              </div>
+
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <style>
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        top: -50px;
+        left: 25%;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+      }
+
+
+  </style>
+
+    <ul id="carousel">
+      <!--  Place additional items here -->
+        <li class="visible">
+          <a href="{% url 'app:index' %}">
+            <div class="tooltip">
+              <img src="{% static 'app/images/sites/index.png' %}" alt="" />
+              <span class="tooltiptext">Premi per tornare all'index</span>
+            </div>
+          </a>
+      </li>
+
+
+    </ul>
+
+
+
+  </div>
+
+
+  <!-- JavaScript includes - jQuery and our own script.js -->
+  <script src="{% static 'app/js/jquery-1.7.2.min.js' %}"></script>
+  <script src="{% static 'app/js/campionato.js' %}"></script>
+
+</body>

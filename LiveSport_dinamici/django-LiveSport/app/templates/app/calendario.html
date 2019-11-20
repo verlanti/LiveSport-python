@@ -1,0 +1,138 @@
+<head>
+    <meta charset="utf-8" />
+    <title>Calendario</title>
+    {% load static %}
+    <!-- The stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/calendario.css' %}"/>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rochester|Bree+Serif" />
+</head>
+
+<body>
+    <header>
+        <h2>Calendary Page</h2>
+        <h3>Calendario</h3>
+
+<div class="container">
+
+    <div class="dropdown">
+      <div class="select">
+        <span><h4>Seleziona Giornata</h4></span>
+      </div>
+
+      <ul class="dropdown-menu">
+
+
+        {% for gg in giornata_list %}
+        <input type="hidden">
+        <li id={{gg.giornata}}{{gg.ar}}><h5>{{gg.giornata }}{% if gg.ar == 'R' %}^ Ritorno{% else %}^ Andata{%endif%}</h5></li>
+        {%endfor%}
+      </ul>
+
+    </div>
+
+</div>
+
+  <form method="post">
+  {% csrf_token %}
+
+  <input type="submit" name="giornata" id="giornata" value="1A">
+
+  </form>
+
+  </header>
+
+
+    <div id="main">
+
+
+
+        <table class="darkTable">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Campionato</th>
+                  <th>Giornata</th>
+                  <th>AR</th>
+                  <th>Data</th>
+                  <th>Locali</th>
+                  <th>Ospiti</th>
+                  <th>Gol locali</th>
+                  <th>Gol ospiti</th>
+                </tr>
+              </thead>
+            <tbody>
+
+            {% for p in single_giornata_list %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{p.campionato.nome}}</td>
+                <td>{{p.giornata}}</td>
+                <td>{{p.ar}}</td>
+                <td>{{p.data}}</td>
+                <td><a href="{% url 'app:squadra' campionato_id p.locali.id %}" style="text-decoration:none;color:#fff" >{{p.locali.nome}}</a></td>
+                <td><a href="{% url 'app:squadra' campionato_id p.ospiti.id %}" style="text-decoration:none;color:#fff" >{{p.ospiti.nome}}</a></td>
+                <td>{% for i in p.risultati_set.all %} {{i.retilocali}}{%endfor%}</td>
+                <td>{% for i in p.risultati_set.all %} {{i.retiospiti}}{%endfor%}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+        <ul id="carousel">
+          <!--  Place additional items here -->
+            <li class="visible">
+              <a href="{% url 'app:index' %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/index.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per tornare all'index</span>
+                </div>
+              </a>
+          </li>
+          <li class="visible">
+              <a href="{% url 'app:campionato' %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/championship.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare al campionato</span>
+                </div>
+            </a>
+          </li>
+          <li class="visible">
+              <a href="{% url 'app:calendarioall' campionato_id %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/calendarioall.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare al calendario 2</span>
+                </div>
+            </a>
+          </li>
+          <li class="visible">
+              <a href="{% url 'app:classifica' campionato_id %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/classifica.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare alla classifica</span>
+                </div>
+            </a>
+          </li>
+          <li class="visible">
+              <a href="{% url 'app:schedina' campionato_id %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/pool.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare alla schedina</span>
+                </div>
+            </a>
+          </li>
+
+        </ul>
+
+
+    </div>
+
+        <!-- JavaScript includes - jQuery and our own script.js -->
+        <script src="{% static 'app/js/jquery-1.7.2.min.js' %}"></script>
+        <script src="{% static 'app/js/calendario.js' %}"></script>
+
+</body>

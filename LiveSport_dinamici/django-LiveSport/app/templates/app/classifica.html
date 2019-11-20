@@ -1,0 +1,151 @@
+<head>
+    <meta charset="utf-8" />
+    <title>Classifica</title>
+    {% load static %}
+
+    <!-- The stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/classifica.css' %}"/>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rochester|Bree+Serif" />
+</head>
+
+<body>
+    <header>
+        <h2>Classification Page</h2>
+        <h3>Classifica</h3>
+
+    </header>
+
+
+    <div id="main">
+
+        <table class="darkTable">
+            <thead>
+                <tr>
+                  <th>Pos.</th>
+                  <th>Squadra</th>
+                  <th>Giornata</th>
+                  <th>Vinte</th>
+                  <th>Pareggiate</th>
+                  <th>Perse</th>
+                  <th>Gol fatti</th>
+                  <th>Gol subiti</th>
+                  <th>Differenza Reti</th>
+                  <th>Punti</th>
+                </tr>
+              </thead>
+            <tbody>
+              <!-- 0.nome,1.vinte,2.pareggiate,3.perse,4.golfatti, 5.golsubiti,6.diffReti,7. Punti-->
+              {%for sq in classifica %}
+              <tr>
+                <td> {{ forloop.counter }} </td>
+                <td>{%for i in team_list %}
+                    {%if i.1 == sq.0 %}
+                    <a href="{% url 'app:squadra' campionato_id i.0 %}" style="text-decoration:none;color:#fff" >{{i.1}}</a>
+                    {%endif%}
+                    {%endfor%}
+                </td>
+                <td>38</td>
+                <td>{{sq.1}}</td>
+                <td>{{sq.2}}</td>
+                <td>{{sq.3}}</td>
+                <td>{{sq.4}}</td>
+                <td>{{sq.5}}</td>
+                <td>{{sq.6}}</td>
+                <td>{{sq.7}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+        </table>
+
+        <style>
+
+          .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+          }
+
+          .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: -50px;
+            left: 25%;
+          }
+
+          .tooltip:hover .tooltiptext {
+            visibility: visible;
+          }
+
+
+      </style>
+
+
+
+
+
+
+        <ul id="carousel">
+          <!--  Place additional items here -->
+            <li class="visible">
+              <a href="{% url 'app:index' %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/index.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per tornare all'index</span>
+                </div>
+              </a>
+          </li>
+          <li class="visible">
+              <a href="{% url 'app:campionato' %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/championship.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare al campionato</span>
+                </div>
+            </a>
+          </li>
+          <li class="visible">
+                <a href="{% url 'app:calendario' campionato_id %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/calendario.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare al calendario </span>
+                </div>
+            </a>
+          </li>
+          <li class="visible">
+              <a href="{% url 'app:calendarioall' campionato_id %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/calendarioall.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare al calendario 2</span>
+                </div>
+            </a>
+          </li>
+          <li class="visible">
+              <a href="{% url 'app:schedina' campionato_id %}">
+                <div class="tooltip">
+                  <img src="{% static 'app/images/sites/pool.png' %}" alt="" />
+                  <span class="tooltiptext">Premi per andare alla schedina</span>
+                </div>
+            </a>
+          </li>
+
+        </ul>
+
+
+
+
+    </div>
+
+        <!-- JavaScript includes - jQuery and our own script.js -->
+        <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+        <script src="{% static 'app/js/classifica.js' %}"></script>
+
+</body>
