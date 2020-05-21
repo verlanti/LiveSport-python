@@ -1,0 +1,5 @@
+# Default ignored files
+/workspace.xml
+/django_venv
+.git
+.idea
